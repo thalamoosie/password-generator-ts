@@ -55,12 +55,6 @@ const generatePw = function (charLen = 5, inclUpper, inclNumber, inclSymbol) {
         asciiPass.push(randChar);
         console.log(`Random character added to password: ${randChar} : ${String.fromCharCode(randChar)}`);
     }
-    // console.log("For Loop w/ Required Chars: ");
-    // for (const requiredChar of requiredChars) {
-    //   const randIndex = h.randomArrIndex(asciiPass);
-    //   asciiPass[randIndex] = requiredChar;
-    //   console.log(asciiPass[randIndex]);
-    // }
     // Compile a nice, random ASCII password array based on the desired length
     // Sort the array randomly so you don't just get the first range
     // Do it n times, n = a random number of times based on length of password desired
@@ -69,7 +63,7 @@ const generatePw = function (charLen = 5, inclUpper, inclNumber, inclSymbol) {
     }
     console.log("Required", requiredChars);
     console.log("AsciiPass", asciiPass);
-    const requireStub = [51, 60, 67];
+    // if AsciiPass doesn't include the randomly generated required chars above, include them:
     if (!asciiPass.every((c) => requiredChars.includes(c))) {
         for (let i = 0; i < requiredChars.length; i++) {
             const randIndex = h.randomArrIndex(asciiPass);
@@ -87,4 +81,4 @@ const generatePw = function (charLen = 5, inclUpper, inclNumber, inclSymbol) {
     console.log(passwd);
     return passwd;
 };
-generatePw(16, true, true, true);
+generatePw(48, true, true, true);

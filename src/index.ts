@@ -36,8 +36,6 @@ const generatePw = function (
   let charPool: number[] = [...asciiSymbols.lowerChars];
   const asciiPass: number[] = [];
 
-  console.log("CharPool Start:", charPool);
-
   if (inclNumber) {
     const nums = asciiSymbols.numberChars;
     const randIndex = h.randomArrIndex(nums);
@@ -59,10 +57,11 @@ const generatePw = function (
 
   // Make a shallow copy of the password so far to keep track of required chars
   const requiredChars: number[] = [...chars];
-
+  // Calculate remainder of length needed and sort randomly
   const remainder = charLen - requiredChars.length;
   chars.sort(() => Math.random() - 0.5);
 
+  // Push random characters from character pool to Ascii holding array:
   for (let i = 0; i < remainder; i++) {
     const randIndex = h.randomArrIndex(charPool);
     const randChar = charPool[randIndex];
@@ -74,16 +73,7 @@ const generatePw = function (
     );
   }
 
-  // console.log("For Loop w/ Required Chars: ");
-  // for (const requiredChar of requiredChars) {
-  //   const randIndex = h.randomArrIndex(asciiPass);
-  //   asciiPass[randIndex] = requiredChar;
-  //   console.log(asciiPass[randIndex]);
-  // }
-
-  // Compile a nice, random ASCII password array based on the desired length
-  // Sort the array randomly so you don't just get the first range
-  // Do it n times, n = a random number of times based on length of password desired
+  // Sort array n times based on range of desired length of pw
 
   for (let i = 0; i <= h.randomNumber(1, charLen); i++) {
     asciiPass.sort(() => Math.random() - 0.5);
@@ -92,6 +82,7 @@ const generatePw = function (
   console.log("Required", requiredChars);
   console.log("AsciiPass", asciiPass);
 
+  // if AsciiPass doesn't include the randomly generated required chars above, include them:
   if (!asciiPass.every((c) => requiredChars.includes(c))) {
     for (let i = 0; i < requiredChars.length; i++) {
       const randIndex = h.randomArrIndex(asciiPass);
@@ -99,9 +90,7 @@ const generatePw = function (
       console.log("Ding!");
     }
   }
-
   console.log("Amended Asciipass", asciiPass);
-  // Check to make sure that the asciiPass array contains one of the sorted Types
 
   const finalPass: String[] = [];
 
@@ -114,4 +103,4 @@ const generatePw = function (
   return passwd;
 };
 
-generatePw(16, true, true, true);
+generatePw(48, true, true, true);
