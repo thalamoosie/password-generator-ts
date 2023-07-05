@@ -26,11 +26,19 @@ const randomArrIndex = function (arr) {
  * @param max Maximum in randomization range
  * @returns A random integer between the min and max inclusive
  */
-const randomNumber = function (min, max) {
+const randomNumber = function (min = 1, max) {
     return Math.floor(Math.random() * (max - min) + min);
 };
+function createUniqueValues(len, min, max) {
+    const set = new Set();
+    while (set.size < len) {
+        set.add(randomNumber(min, max));
+    }
+    return set;
+}
 module.exports = {
     createRange,
     randomArrIndex,
     randomNumber,
+    createUniqueValues,
 };

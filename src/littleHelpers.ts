@@ -29,12 +29,21 @@ const randomArrIndex = function (arr: number[]) {
  * @returns A random integer between the min and max inclusive
  */
 
-const randomNumber = function (min: number, max: number) {
+const randomNumber = function (min: number = 1, max: number) {
   return Math.floor(Math.random() * (max - min) + min);
 };
+
+function createUniqueValues(len: number, min: number, max: number) {
+  const set = new Set();
+  while (set.size < len) {
+    set.add(randomNumber(min, max));
+  }
+  return set;
+}
 
 module.exports = {
   createRange,
   randomArrIndex,
   randomNumber,
+  createUniqueValues,
 };
