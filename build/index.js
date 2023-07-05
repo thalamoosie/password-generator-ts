@@ -31,10 +31,9 @@ const leetSpeak = {
     o: ["0", "()"],
 };
 // Function to generate a passphrase
-const generatePhrase = function (phraseLen = 2, delim = "-", charSwap = false) {
-    console.log(phraseLen, delim, charSwap);
-    function accessWordList() {
-        return __awaiter(this, void 0, void 0, function* () {
+const generatePhrase = function (phraseLen = 2, delim = "-", charSwap = false, capitalize = false) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
             const words = yield loadWordList();
             const wordsLen = words.length;
             const pwValues = h.createUniqueValues(phraseLen, 1, wordsLen);
@@ -42,23 +41,66 @@ const generatePhrase = function (phraseLen = 2, delim = "-", charSwap = false) {
             for (const num of pwValues) {
                 phraseArray.push(words[num]);
             }
-            console.log(wordsLen);
-            console.log(phraseArray);
             if (charSwap) {
                 // For each string in the array, if the character in the string matches one of the keys in leetSpeak
                 // Then substitute that character in place[i] with a random element from the array - use the randomArrIndex() helper function
-                console.log("ello govna");
+                console.log("Swap, please");
+            }
+            if (capitalize) {
+                // Make a random word in the passphrase all caps
+                console.log("Caps please.");
             }
             const finalPassphrase = phraseArray.join(delim);
+            console.log("FINAL PASSPHRASE");
             console.log(finalPassphrase);
             return finalPassphrase;
-        });
-    }
-    accessWordList().catch((err) => {
-        console.error(err);
+        }
+        catch (err) {
+            console.error(`Error loading wordlist: ${err}`);
+            throw err;
+        }
     });
 };
-generatePhrase(5, "|", true);
+generatePhrase(8, ":", true, true).catch((err) => {
+    console.error(err);
+});
+// const generatePhrase = async function (
+//   phraseLen: number = 2,
+//   delim: string = "-",
+//   charSwap: boolean = false,
+//   capitalize: boolean = false
+// ) {
+//   async function accessWordList() {
+//     try {
+//       const words = await loadWordList();
+//       const wordsLen: number = words.length;
+//       const pwValues = h.createUniqueValues(phraseLen, 1, wordsLen);
+//     } catch (err) {
+//       console.error(`Error loading wordlist: ${err}`);
+//     }
+//     const phraseArray: string[] = [];
+//     for (const num of pwValues) {
+//       phraseArray.push(words[num]);
+//     }
+//     console.log(wordsLen);
+//     console.log(phraseArray);
+//     if (charSwap) {
+//       // For each string in the array, if the character in the string matches one of the keys in leetSpeak
+//       // Then substitute that character in place[i] with a random element from the array - use the randomArrIndex() helper function
+//       console.log("ello govna");
+//     }
+//     if (capitalize) {
+//       // Make a random word in the passphrase all caps
+//     }
+//     const finalPassphrase: string = phraseArray.join(delim);
+//     console.log(finalPassphrase);
+//     return finalPassphrase;
+//   }
+//   accessWordList().catch((err) => {
+//     console.error(err);
+//   });
+// };
+generatePhrase(5, "|", true, true);
 // /**
 //  *
 //  * @param charLen Length of desired password in chars

@@ -11,14 +11,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const data = require("./wordlist");
 let wordData = null;
+// async function fetchWordlist(): Promise<void> {
+//   return new Promise<void>((resolve) => {
+//     setTimeout(() => {
+//       wordData = data;
+//       resolve();
+//     }, 1000);
+//   });
+// }
+// async function getWordList(): Promise<string[]> {
+//   if (!wordData) await fetchWordlist();
+//   return wordData!;
+// }
 function fetchWordlist() {
     return __awaiter(this, void 0, void 0, function* () {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                wordData = data;
-                resolve();
-            }, 1000);
-        });
+        wordData = data;
+        return Promise.resolve();
     });
 }
 function getWordList() {
