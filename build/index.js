@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 const h = require("./littleHelpers");
 const loadWordList = require("./wordLoader");
+// const dicts = require("./dicts");
 // const newSetOne = h.createUniqueValues(10, 2, 200000);
 // console.log(newSetOne);
 const asciiSymbols = {
@@ -47,8 +48,9 @@ const generatePhrase = function (phraseLen = 2, delim = "-", charSwap = false, c
                 console.log("Swap, please");
             }
             if (capitalize) {
-                // Make a random word in the passphrase all caps
-                console.log("Caps please.");
+                const rIndex = h.randomNumber(0, phraseArray.length);
+                const capWord = phraseArray[rIndex].toUpperCase();
+                phraseArray[rIndex] = capWord;
             }
             const finalPassphrase = phraseArray.join(delim);
             console.log("FINAL PASSPHRASE");
@@ -56,12 +58,15 @@ const generatePhrase = function (phraseLen = 2, delim = "-", charSwap = false, c
             return finalPassphrase;
         }
         catch (err) {
-            console.error(`Error loading wordlist: ${err}`);
+            console.error(`Error generating password: ${err}`);
             throw err;
         }
     });
 };
 generatePhrase(8, ":", true, true).catch((err) => {
+    console.error(err);
+});
+generatePhrase(6, undefined, true, true).catch((err) => {
     console.error(err);
 });
 // const generatePhrase = async function (
@@ -100,7 +105,6 @@ generatePhrase(8, ":", true, true).catch((err) => {
 //     console.error(err);
 //   });
 // };
-generatePhrase(5, "|", true, true);
 // /**
 //  *
 //  * @param charLen Length of desired password in chars
