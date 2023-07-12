@@ -2,9 +2,6 @@ const h = require("./littleHelpers");
 const loadWordList = require("./wordLoader");
 // const dicts = require("./dicts");
 
-// const newSetOne = h.createUniqueValues(10, 2, 200000);
-// console.log(newSetOne);
-
 const asciiSymbols = {
   symbolChars: h
     .createRange(33, 47)
@@ -52,9 +49,9 @@ const generatePhrase = async function (
 
     // Capitalize 1 random word in all caps if selected:
     if (capitalize) {
-      const rIndex: number = h.randomNumber(0, phraseArray.length);
-      const capWord: string = phraseArray[rIndex].toUpperCase();
-      phraseArray[rIndex] = capWord;
+      const i = h.randomArrIndex(phraseArray);
+      const capWord: string = phraseArray[i].toUpperCase();
+      phraseArray[i] = capWord;
     }
 
     const finalPassphrase: string = phraseArray.join(delim);

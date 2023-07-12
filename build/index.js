@@ -11,8 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 const h = require("./littleHelpers");
 const loadWordList = require("./wordLoader");
 // const dicts = require("./dicts");
-// const newSetOne = h.createUniqueValues(10, 2, 200000);
-// console.log(newSetOne);
 const asciiSymbols = {
     symbolChars: h
         .createRange(33, 47)
@@ -47,10 +45,11 @@ const generatePhrase = function (phraseLen = 2, delim = "-", charSwap = false, c
                 // Then substitute that character in place[i] with a random element from the array - use the randomArrIndex() helper function
                 console.log("Swap, please");
             }
+            // Capitalize 1 random word in all caps if selected:
             if (capitalize) {
-                const rIndex = h.randomNumber(0, phraseArray.length);
-                const capWord = phraseArray[rIndex].toUpperCase();
-                phraseArray[rIndex] = capWord;
+                const i = h.randomArrIndex(phraseArray);
+                const capWord = phraseArray[i].toUpperCase();
+                phraseArray[i] = capWord;
             }
             const finalPassphrase = phraseArray.join(delim);
             console.log("FINAL PASSPHRASE");
