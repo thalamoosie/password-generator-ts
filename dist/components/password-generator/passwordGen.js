@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const { createRange, randomArrIndex, randomNumber } = require("./utils");
+const { createRange, randomArrIndex, randomNumber, } = require("../../utils/utils");
 const { asciiSymbols } = require("../../utils/dict");
 /**
  *
@@ -49,20 +49,21 @@ const generatePassword = function (charLen = 5, inclUpper, inclNumber, inclSymbo
     }
     console.log("Required", requiredChars);
     console.log("AsciiPass", asciiPass);
-    // if AsciiPass doesn't include the randomly generated required chars above, include them:
     if (!asciiPass.every((c) => requiredChars.includes(c))) {
         for (let i = 0; i < requiredChars.length; i++) {
-            const randIndex = randomArrIndex(asciiPass);
-            asciiPass[randIndex] = requiredChars[i];
-            console.log("Ding!");
+            if (!asciiPass.includes(requiredChars[i])) {
+                const randIndex = randomArrIndex(asciiPass);
+                asciiPass.push(requiredChars[i]);
+            }
         }
     }
     console.log("Amended Asciipass", asciiPass);
-    const finalPass = asciiPass.map((e) => {
-        String.fromCharCode(e);
+    const finalPass = [];
+    asciiPass.forEach((e) => {
+        finalPass.push(String.fromCharCode(e));
     });
     const passwd = finalPass.join("");
-    console.log(passwd);
+    console.log("password: ", passwd);
     return passwd;
 };
 module.exports = { generatePassword };

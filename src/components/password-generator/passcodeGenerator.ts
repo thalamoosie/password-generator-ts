@@ -92,5 +92,4 @@ const generatePassphrase = function (
 };
 
 generatePassphrase(8, ":", true, true);
-
 generatePassphrase(6, undefined, false, true);

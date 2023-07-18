@@ -6,9 +6,9 @@ const date: Date = new Date();
 const { thisMonth, todayDate, thisYear } = generateDate(date);
 
 const user: IUser = {
-  userName: "brittpezzillo",
-  emailDomain: "gmail.com",
-  defaultPassword: "Testing1234!",
+  userName: "mm00sie",
+  emailDomain: "big.moose",
+  defaultPassword: "TestingPW!",
 };
 
 console.log(user);

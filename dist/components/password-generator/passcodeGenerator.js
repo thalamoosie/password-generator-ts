@@ -41,7 +41,7 @@ const generatePassphrase = function (phraseLen = 3, delim = "-", charSwap = fals
             searchLetters.push(wordKeys[randomArrIndex(wordKeys)]);
         }
         console.log(`Letters: `, searchLetters);
-        // Find words randomly based on key
+        // Find words randomly based on key using the searchLetters array:
         const phraseArray = Array.from(searchLetters, (key) => { var _a; return (_a = data[key]) === null || _a === void 0 ? void 0 : _a[randomArrIndex(data[key])]; });
         console.log(phraseArray);
         // for (const num of passwordValues) {
